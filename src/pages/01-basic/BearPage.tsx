@@ -16,6 +16,8 @@ export const BearPage = () => {
 
         <PandaBears/>
 
+        <BearsDisplay/>
+
       </div>
 
     </>
@@ -69,6 +71,28 @@ export const PandaBears = () => {
             <span className="text-3xl mx-2 lg:mx-10"> { pandaBears } </span>
             <button onClick={ ()=> increasePandaBears(-1) }>-1</button>
           </div>
+
+        </WhiteCard>;
+};
+
+export const BearsDisplay = () => {
+
+  const bears = useBearStore(state => state.bears);
+  const addBear = useBearStore(state => state.addBear);
+  const clearBears = useBearStore(state => state.clearBears);
+
+  return <WhiteCard centered>
+          <h2>Osos</h2>
+          <button className='mt-2' onClick={ ()=> addBear() }>Agregar Oso</button>
+          <button className='mt-2' onClick={ ()=> clearBears() }>Limpiar Osos</button>
+
+          <ul>
+            {
+              bears.map( bear => (
+                <li key={ bear.id }>{ bear.name }</li>
+              ) )
+            }
+          </ul>
 
         </WhiteCard>;
 };
